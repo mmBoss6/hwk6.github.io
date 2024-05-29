@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trip</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: aliceblue;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            position: relative;
+            font-size: 12px;
+            text-align: center;
+            height: 60px;
+        }
+
+        .navbar a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 24px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        #m0{
+            position:absolute;
+            top: 38%;
+            left: 5%;
+            height: 220px;
+            width: 220px;
+        }
+        #h30{
+            position:absolute;
+            top: 7.4%;
+            right: 32%;
+        }
+        #dz{
+            position: absolute;
+            top: 7.6%;
+            right: -4%;
+            height: 220px;
+            width: 100%;
+        }
+        #h31{
+            position:absolute;
+            top: 32.5%;
+            right: 17%;
+            z-index: 2;
+        }
+        #gM{
+            position: absolute;
+            top: 38%;
+            right: -4%;
+            height: 220px;
+            width: 220px;
+        }
+        #h310{
+          position: absolute;
+          top: 32.5%;
+          left: 4.5%;
+          color:black;
+        }
+        /* 新增样式 */
+        .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+        .modal2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+        .modal-content {
+        background-color: white;
+        padding: 20px;
+        width: 60%;
+        height: 60%;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .modal2-content {
+        background-color: white;
+        padding: 20px;
+        width: 60%;
+        height: 60%;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 3;
+    }
+    .modal-content input[type="text"] {
+        width: 80%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .modal-content p {
+        margin-bottom: 20px;
+    }
+
+    .modal-content label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .modal-content button {
+        padding: 10px 20px;
+        margin-top: 10px;
+        border: none;
+        background-color: #333;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .modal-content button:hover {
+        background-color: #555;
+    }
+    #bb0{
+        position: absolute;
+        top:75%;
+        left:22%;
+    }
+    #bb1{
+        position: absolute;
+        top:75%;
+        right:22%;
+    }
+
+  .modal2-content label {
+    display: block;
+    margin-top: 10px;
+  }
+    [v-cloak] {
+            display: none;
+        }
+        #bb01{
+            position: absolute;
+            top: 20%;
+            left: 25%;
+        }
+        #bb02{
+            position: absolute;
+            top: 20%;
+            right: 25%;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app" class="container">
+    <div class="navbar">
+        <div>
+            <a href="./pageHome.html">首页</a>
+            <a href="./Customize.html" class="current-page">旅游</a>
+            <a href="#" >社交</a>
+            <a href="./cultureProduct.html" >文创</a>
+            <a href="#">搜索</a>
+            <a href="./contactUs.html">联系我们</a>
+        </div>
+    </div>
+
+    <div class="custom-travel-plan">
+        <img src="./imgs/map0.jpg" id="m0" alt="Custom Travel Plan Image">
+        <img src="./imgs/customize.png" id="dz" alt="Custom Travel Plan Image" @click="openModal">
+        <div>
+            <h3 id="h310">进入地图（默认红旅）</h3>
+            <h3 id="h30">个性化定制旅游计划</h3>
+            <h3 id="h31">虚拟导游</h3>
+            <img src="./imgs/culProductImgs/Tem_grapeManger.jpg"  id="gM" alt="">
+        </div>
+    </div>
+
+    <!-- 弹窗部分 -->
+    <div v-if="showModal" class="modal">
+        <div class="modal-content">
+            <h4>请输入你对旅游计划的描述、意愿等</h4>
+            <textarea placeholder="请输入你的描述" rows="4" style="width: 82%;"></textarea>
+            
+            <h4>请输入此次旅游的人数</h4>
+            <input type="text" placeholder="输入框">
+            <p>请选择一个旅游模式：</p>
+            <label>
+                <input type="radio" name="option" value="option1">
+                红旅
+                <input type="radio" name="option" value="option2">
+                康旅
+            </label>
+            <label>
+                <input type="radio" name="option" value="option3">
+                文旅
+                <input type="radio" name="option" value="option4">
+                三旅融合旅游
+            </label><br>
+            <button @click="submitForm" id="bb0">提交</button>
+            <button @click="closeModal" id="bb1">取消</button>
+        </div>
+    </div>
+      
+        <div class="modal2" v-if="showModal2" >
+          <div class="modal2-content">
+            <input type="button" value="选择一" v-on:click="vf1" id="bb01">
+
+            <input type="button" value="选择二" v-on:click="vf2" id="bb02">
+            <!-- 1 -->
+            <div v-if="v1" v-cloak>
+                <h3> 选择一 </h3>
+                <br>
+                 旅游路线：① 五峰山革命活动旧址 → ② 昌黎渔岛温泉度假区 
+                          → ③ 碣石山风景区 → ④ 黄金海岸风景区
+                <br>
+                 计划日期 ： 6月1日-6月2日
+                <br>
+                 居住酒店 ： xxx酒店
+                <br>
+                <label>
+                <h5>是否需要预定酒店</h5>
+                <input type="radio" name="option" value="option1">
+                是
+                <input type="radio" name="option" value="option2">
+                否
+            </label>
+            </div>
+            <!-- 2 -->
+            <div v-if="v2" v-cloak>
+                <h3>选择二</h3>
+                <br>
+                旅游路线：① 五峰山革命活动旧址 → ② 昌黎渔岛温泉度假区 → ③ 阿那亚
+               <br>
+                计划日期 ： 6月1日-6月2日
+               <br>
+                居住酒店 ： xxx酒店
+               <br>
+               <label>
+               <h5>是否需要预定酒店</h5>
+               <input type="radio" name="option" value="option1">
+               是
+               <input type="radio" name="option" value="option2">
+               否
+           </label>
+           </div>
+           <input type="button" value="确认" @click="closeModal2">
+            <button @click="closeModal2">关闭</button>
+          </div>
+      </div>
+      
+    
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            showModal: false,
+            showModal2: false,
+            v1:true,
+            v2:false,
+        },
+        methods: {
+            openModal() {
+                this.showModal = true;
+            },
+            closeModal() {
+                this.showModal = false;
+            },
+            submitForm() {
+                // 处理提交表单的逻辑
+                // 可以通过 this.$refs 来获取表单元素的值
+                this.showModal2=true;
+                this.showModal=false;
+            },closeModal2 (){
+               this.showModal2=false;
+            }
+            ,
+            vf1(){
+                this.v1=true;
+                this.v2=false;
+            },
+            vf2(){
+                this.v2=true;
+                this.v1=false;
+            }
+        }
+    });
+</script>
+</body>
+</html>

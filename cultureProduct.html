@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cultureProduct</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: aliceblue;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            position: relative;
+            font-size: 12px;
+            text-align: center; /* 让导航栏内容居中 */
+            height:60px;
+        }
+        .navbar a {
+            display: inline-block; /* 改为内联块级元素 */
+            color: white;
+            text-align: center;
+            padding: 24px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 10px; /* 调整产品列表的内边距 */
+        }
+        .product-item {
+            width: 100%; /* 将产品项宽度设置为100% */
+            position: relative;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+        .product-item img {
+            width: 30%; /* 调整产品图片的宽度 */
+            height: auto; /* 自适应高度 */
+            margin-right: 5%; /* 调整图片右侧间距 */
+            left: 0;
+        }
+        .product-details {
+            margin-top: 10px; /* 调整顶部间距 */
+            width: 100%; /* 宽度设置为100% */
+        }
+        .product-details h3 {
+            font-size: 1.2em; /* 调整标题字体大小 */
+            margin-bottom: 5px; /* 调整底部间距 */
+        }
+        .product-details span {
+            display: block; /* 每个信息块独占一行 */
+            margin-bottom: 5px; /* 调整下方间距 */
+            text-align: center; /* 文字居中显示 */
+        }
+        .product-details span.price {
+            font-size: 1.5em; /* 设置价格字体大小 */
+            color: red; /* 设置价格字体颜色为红色 */
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="navbar">
+        <div>
+            <a href="./pageHome.html">首页</a>
+            <a href="./Customize.html" >旅游</a>
+            <a href="#">社交</a>
+            <a href="">文创</a>
+            <a href="#">搜索</a>
+            <a href="./contactUs.html">联系我们</a>
+        </div>
+    </div>
+    <div class="product-list">
+        <div class="product-item" v-for="product in products" @click="showDetail(product)">
+            <img :src="product.image" alt="Product Image">
+            <div class="product-details">
+                <div style="width: 300px;">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description }}</p>
+                </div>
+                <div style="width: 150px;">
+                    <span># {{ product.tags.join(', ') }}</span><br>
+                    <span class="price">¥ {{ product.price }}元</span><br>
+                    <span>已售 {{ product.quantitySold }}件</span><br>
+                    <span>{{ product.comments }}+条评论</span><br>
+                    <span>{{ product.PositiveRating }}%好评</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            products: [
+                { 
+                    name: '红色皮影玩具',
+                    image: './imgs/culProductImgs/Red_shadowPlay_toy.jpg',
+                    description: '吹起冲锋号，举起大刀向敌人砍去',
+                    tags: ['皮影', '玩具'],
+                    price: '19.99',
+                    quantitySold: "600+",
+                    comments: "100",
+                    PositiveRating: 100
+                },
+                { 
+                    name: '新型定制皮影',
+                    image: './imgs/culProductImgs/Cul_newCustomize_shadowPlay.jpg',
+                    description: '可以DIY制作的皮影文创产品',
+                    tags: ['DIY', '玩具'],
+                    price: '9.99',
+                    quantitySold: "200+",
+                    comments: "80",
+                    PositiveRating: 100
+                },
+                { 
+                    name: '葡萄经理',
+                    image: './imgs/culProductImgs/Tem_grapeManger.jpg',
+                    description: '摆放在门口，葡萄经理欢迎大家光临',
+                    tags: ['玩具', '摆件'],
+                    price: '29.98',
+                    quantitySold: "100+",
+                    comments: "20",
+                    PositiveRating: 95
+                },
+                { 
+                    name: '经典皮影',
+                    image: './imgs/culProductImgs/Cul_classic_shadowPlay.jpg',
+                    description: '从秦皇岛经典文化地点——孟姜女庙提取孟姜女皮影形象',
+                    tags: ['皮影', '玩具'],
+                    price: '7.98',
+                    quantitySold: "20+",
+                    comments: "5",
+                    PositiveRating: 100
+                }
+                // Add more products as needed
+            ]
+        },
+        methods: {
+            showDetail(product) {
+                // Redirect to detail page with selected product
+                window.location.href = `productDetail.html?name=${product.name}`;
+            }
+        }
+    });
+</script>
+</body>
+</html>

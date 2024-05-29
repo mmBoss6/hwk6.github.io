@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myForm</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            position: absolute;
+            top: 30%;
+            left:39%;
+            width: 22%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        input[type="text"],
+        button {
+            width: calc(100% - 40px);
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .menu-icon {
+            cursor: pointer;
+            font-size: 24px;
+            padding: 10px;
+        }
+
+        .menu {
+            position: absolute;
+            top: 50px; 
+            left: 0;
+            width: 5%;
+            background-color: #333;
+            color: white;
+            z-index: 1; 
+        }
+
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu li {
+            margin: 10px 0;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            padding: 10px;
+        }
+        [v-cloak]{
+            display: none;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+        #Fname{
+            position: absolute;
+            left: 40%;
+            top: 20%;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="header">
+            <div class="menu-icon" @click="toggleMenu">&#9776;</div>
+            <div v-if="menuVisible" class="menu" v-cloak>
+                <ul>
+                    <li><a href="./pageHome.html">首页</a></li>
+                    <li><a href="./popularAttractions.html">热门景点</a></li>
+                    <li><a href="/contactUs.html">联系我们</a></li>
+                    <li><a href="./myPage.html">我的</a></li>
+                    <li><a href="./Customize.html">我的昌黎行</a></li>
+                    <li><a href="./Customize.html">微文旅</a></li>
+                    <li><a href="./Customize.html">微红旅</a></li>
+                    <li><a href="./Customize.html">微康旅</a></li>
+                    <li><a href="./Customize.html">我的行程</a></li>
+                    <li><a href="">搜索</a></li>
+                </ul>
+            </div>
+        </div>
+        <h2 id="Fname">身体评估表</h2>
+        <form>
+            <input type="text" v-model="name" placeholder="姓名（中文）"><!-- {{name}} -->
+            <input type="text" v-model="age" placeholder="年龄（岁）"><!-- {{Age}} -->
+            <input type="text" v-model="height" placeholder="身高(cm)">
+            <input type="text" v-model="weight" placeholder="体重(kg)">
+            <input type="text" v-model="gender" placeholder="性别（男/女）"><!-- {{Gender}} -->
+            <input type="text" v-model="medicalHistory" placeholder="疾病史"><!-- 详细 -->
+            <div v-if="!editing">
+                <button @click="editForm">编辑</button>
+            </div>
+            <div v-if="editing" v-cloak>
+                <button @click="submitForm">提交</button>
+                <button @click="cancelEdit">取消</button>
+            </div>
+        </form>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                name: '',
+                age: '',
+                height: '',
+                weight: '',
+                gender: '',
+                medicalHistory: '',
+                editing: false,
+                menuVisible: false,
+            },
+            methods: {
+                editForm() {
+                    this.editing = true;
+                },
+                toggleMenu() {
+                    this.menuVisible = !this.menuVisible;
+                },
+                submitForm() {
+                    // 处理提交逻辑
+                    this.editing = false;
+                },
+                cancelEdit() {
+                    this.editing = false;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

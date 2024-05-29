@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        #form {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        input {
+            margin: 10px 0;
+            padding: 12px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 12px 0;
+            border-radius: 5px;
+            width: 50%;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<div id="app">
+<div id="form">
+    <h2>请您注册</h2>
+    <input type="text" placeholder="用户名" v-model="username">
+    <br>
+    <input type="text" placeholder="密码" v-model="password">
+    <br>
+    <input type="text" placeholder="确认密码" v-model="passwordAgain">
+    <br>
+    <input type="button" value="注册"v-on:click="submit0">
+</div>
+</div>
+</body>
+<script>
+var app =new Vue({
+el:"#app",
+data:{
+username:"",
+password:"",
+passwordAgain:""
+},
+methods: {
+    submit0:function(){
+        if(this.password==this.passwordAgain)
+        {
+            axios({
+                    method: "post",
+                    url: "http://localhost:8081/register",
+                    data: {
+                        userName:this.username,
+                        passWord:this.password
+                    }
+                }).then((res) => {
+                  /*   sessionStorage.setItem('token', res.data.data); */
+                  if(res.data.code==400)
+                  {
+                    window.alert("用户名被占用");
+                  }
+                  else {
+                    window.alert("注册成功");
+                  }
+                })
+        }
+    }
+}
+})
+</script>
+</html>
+

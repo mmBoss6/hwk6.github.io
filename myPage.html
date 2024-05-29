@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 添加响应式样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif; /* 设置通用字体 */
+            background-color: aliceblue;
+        }
+
+        nav {
+            background-color: #333;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999; /* 确保导航栏在最顶层 */
+            height:60px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        nav li {
+            display: inline-block;
+            margin: 0 5px; /* 调整间距 */
+        }
+
+        nav li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            position: absolute;
+            top: 17%;
+            font-size: 16px;
+        }
+
+        .avatar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .midNav {
+            text-align: center;
+            margin-top: 48px; /* 防止内容被导航栏遮挡 */
+            padding-top: 10px; /* 增加上内边距 */
+        }
+
+        .icon-container {
+            display: inline-block;
+            margin: 0 5px; /* 调整图标与文本间距 */
+            text-align: center;
+        }
+
+        #mainText {
+            padding-top: 80px; /* 防止内容被导航栏遮挡 */
+        }
+
+        .form-container {
+            width: 90%;
+            max-width: 400px; /* 调整表单容器宽度 */
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .nav-block {
+            width: 90%;
+            max-width: 400px;
+            margin: 10px auto;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333; /* 调整链接颜色 */
+            display: block;
+            padding: 10px 0; /* 调整链接内边距 */
+        }
+        #s01{
+            position: absolute;
+            left: 4.4%;
+        }#s02{
+            position: absolute;
+            left:46%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <nav>
+            <ul>
+                <li><a href="./pageHome.html" id="s01">首页</a></li>
+                <li id="li0"><a href="./myPage.html" id="s02">我的</a></li>
+            </ul>
+            <div class="avatar">
+                <img src="./imgs/avater.jpg" alt="头像" id="avatar0" style="width: 40px; height: 40px; border-radius: 50%;">
+            </div>
+        </nav>
+        <!--   <div class="midNav">
+            <div class="icon-container" id="container1">
+                <a href="#"><i class="fas fa-wallet"></i><br>我的钱包</a>
+            </div>
+            <div class="icon-container" id="container2">
+                <a href="#"><i class="fas fa-file-alt"></i><br>我的订单</a>
+            </div>
+            <div class="icon-container" id="container3">
+                <a href="#"><i class="fas fa-envelope"></i><br>我的消息</a>
+            </div>
+        </div> -->
+        <div id="mainText">
+            <div class="nav-block">
+                <a href="#c1" id="c1"><i class="fas fa-user"></i>个人信息</a>
+                <a href="#c2" id="c2"><i class="fas fa-wallet"></i>我的钱包</a>
+                <a href="#c3" id="c3"><i class="fas fa-file-alt"></i>我的订单</a>
+                <a href="#c4" id="c4"><i class="fas fa-share"></i>我的分享</a>
+                <a href="#c5" id="c5" v-on:click="changeIsFav"><i class="fas fa-heart"></i>我的偏好</a>
+                <a href="#c6" id="c6"><i class="fas fa-thumbs-up"></i>我的点赞</a>
+                <a href="#c7" id="c7"><i class="fas fa-cog"></i>设置</a>
+            </div>
+            <div class="form-container" v-if="isFav" v-cloak>
+                <h2>{{ title }}</h2>
+                <label for="dropdown1">市</label>
+                <select name="dropdown1" id="dropdown1">
+                    <option value="option1">无</option>
+                    <option value="option2">秦皇岛市</option>
+                    <option value="option3">选项2</option>
+                    <option value="option4">选项3</option>
+                </select>
+                <label for="dropdown2">县</label>
+                <select name="dropdown2" id="dropdown2">
+                    <option value="option1">无</option>
+                    <option value="option2">昌黎县</option>
+                    <option value="option3">北戴河区</option>
+                    <option value="option4">海港区</option>
+                </select>
+                <label for="dropdown3">风格</label>
+                <select name="dropdown3" id="dropdown3">
+                    <option value="option1">无</option>
+                    <option value="option2">自然风光</option>
+                    <option value="option3">现代简约</option>
+                    <option value="option4">红色旅游</option>
+                    <option value="option5">健康旅游</option>
+                </select>
+                <label for="dropdown4">人数</label>
+                <select name="dropdown4" id="dropdown4">
+                    <option value="option1">无</option>
+                    <option value="option2">独自旅游</option>
+                    <option value="option3">2~4人</option>
+                    <option value="option4">5~8人</option>
+                </select>
+                <button type="submit">提交</button>
+                <button type="reset" v-on:click="resettingF">重置</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                title: "用户偏好设置",
+                isFav: false
+                /* 后期需要加入大量地区数据 */
+            },
+            methods: {
+                changeIsFav() {
+                    this.isFav = !this.isFav;
+                },
+                resettingF() {
+                    /* 后期v-bind后添加 */
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

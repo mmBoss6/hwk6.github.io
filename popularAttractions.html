@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>popularAttractions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: aliceblue;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* 使用min-height替换height */
+        }
+        .navbar {
+            background-color: #333;
+            position: fixed; 
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            top: 0;
+            z-index: 1000; 
+            height:60px;
+        }
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 10px; /* 调整导航链接的内边距 */
+            text-decoration: none;
+            font-size: 16px; /* 调整导航链接字体大小 */
+        }
+        .navbar a#s2 {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%); /* 使文本水平居中 */
+        }
+        .navbar a:hover {
+            background-color: #555; /* 鼠标悬停时的背景颜色 */
+        }
+        #attraction-container {
+            margin-top: 60px; /* 留出导航栏的空间 */
+            padding: 10px;
+            overflow-y: auto;
+        }
+        .attraction-card {
+            display: flex;
+            flex-direction: column; /* 在手机上改为垂直方向排列 */
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        .attraction-image {
+            max-width: 100%; /* 图片宽度充满父元素 */
+            height: auto; /* 图片高度自适应 */
+        }
+        .attraction-details {
+            padding: 10px;
+            font-size: 14px;
+        }
+        .rating-stars {
+            font-size: 20px;
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="navbar">
+            <a href="./pageHome.html" id="s1">首页</a>
+            <a id="s2">热门景点</a>
+        </div>
+        <div id="attraction-container">
+            <div class="attraction-card" v-for="attraction in attractions" :key="attraction.id">
+                <img class="attraction-image" :src="attraction.image" alt="Attraction Image">
+                <div class="attraction-details">
+                    <h3>{{ attraction.name }}</h3>
+                    <div class="rating-stars">
+                        <span v-for="i in 5"
+                            :class="{ 'fas fa-star': i <= attraction.rating, 'far fa-star': i > attraction.rating && i - 1 < attraction.rating }"></span>
+                    </div>
+                    <p><b>评分:</b> {{ attraction.rating }}</p>
+                    <p><b>热门评论:</b> "{{ attraction.comment }}"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                attractions: [
+                    { id: 1, name: '昌黎五峰山革命活动旧址', image: './imgs/5fs.0.jpg', rating: 5.0, comment: '试看将来的环球，必定是赤旗的世界!' },
+                    { id: 2, name: '碣石山风景区', image: './imgs/jss2.jpg', rating: 5.0, comment: '东临碣石，以观沧海。水何澹澹，山岛竦峙。' },
+                    { id: 3, name: '北戴河鸽子窝', image: './imgs/bdh-gzw0.jpg', rating: 4.0, comment: '在鸽子窝，我领略了日出奇观，同时也感受到了一代伟人“换了人间”的伟大情怀。那景象，简直是壮观极了。' },
+                    { id: 4, name: '阿那亚礼堂', image: './imgs/any0.jpg', rating: 4.0, comment: '世界的阿那亚' }
+                ]
+            },
+            methods: {}
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contactUs</title>
+</head>
+<style>
+    .menu-icon {
+    cursor: pointer;
+    font-size: 24px;
+    padding: 10px;
+}
+
+   .menu {
+    position: absolute;
+    top: 50px; 
+    left: 0;
+    width: 5%; /* 使用全宽度 */
+    background-color: #333;
+    color: white;
+    z-index: 1; 
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    margin: 10px 0; /* 修改垂直间距 */
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+    display: block; /* 调整为块级元素 */
+    padding: 10px; /* 增加填充 */
+}
+[v-cloak]{
+    display: none;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: aliceblue;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}
+    h4{
+        position: absolute;
+        left: 44%;
+    }
+    h2{
+        position: absolute;
+        left: 45%;
+    }
+    h3{
+        position: absolute;
+        left: 10%;
+    }
+</style>
+<body>
+ <div id="app">
+    <div class="header">
+        <div class="menu-icon" @click="toggleMenu">&#9776;</div>
+        <div v-if="menuVisible" class="menu" v-cloak>
+            <ul>
+                <li><a href="./pageHome.html">首页</a></li>
+                <li><a href="./popularAttractions.html">热门景点</a></li>
+                <li><a href="#contact">联系我们</a></li>
+                <li><a href="./myPage.html">我的</a></li>
+                <li><a href="./Customize.html">我的昌黎行</a></li>
+                <li><a href="./Customize.html">微文旅</a></li>
+                <li><a href="./Customize.html">微红旅</a></li>
+                <li><a href="./Customize.html">微康旅</a></li>
+                <li><a href="./Customize.html">我的行程</a></li>
+                <li><a href="">搜索</a></li>
+            </ul>
+        </div>
+
+    </div>
+        <h2>微旅行</h2>
+        <br><br><br>
+        <h3>本网站致力于给广大群众更便捷的一站式服务，让您能够探索到更多更好的旅游圣地，感受红文康三旅与酒店结合的魅力，如有服务不周或是想要投诉，请联系</h3>
+        <br><br><br><br>
+        <h4>吕xx ：13812345678</h4>
+        <br><br>
+        <h4>王xx ：13812345678</h4>
+    
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+        <script>
+ var app =new Vue({
+
+
+    el:"#app",
+    data:{
+        menuVisible: false,
+    },methods: {
+        toggleMenu() {
+                    this.menuVisible = !this.menuVisible;
+                },
+    }
+ })
+        </script>
+</body>
+</html>

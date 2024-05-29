@@ -1,0 +1,56 @@
+<!DOCTYPE html>    
+<html lang="en">    
+<head>    
+    <meta charset="UTF-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>高德地图示例</title>    
+    <!-- 引入高德地图JavaScript库 -->    
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=f51812474cef71d1d99d84495dfc43a3"></script>    
+    <style>    
+        #mapContainer {    
+            width: 100%;    
+            height: 500px;    
+            position: relative;    
+        }    
+        #switchButton {    
+            position: absolute;    
+            top: 10px;    
+            left: 10px;    
+            padding: 5px 10px;    
+            background-color: #f00;    
+            color: #fff;    
+            border: none;    
+            border-radius: 5px;    
+            cursor: pointer;    
+        }    
+        #markerInfo {    
+            margin-top: 10px;    
+            font-size: 14px;    
+        }    
+    </style>    
+</head>    
+<body>    
+    <!-- 地图容器 -->    
+    <div id="mapContainer"></div>    
+    <!-- 切换按钮 -->    
+    <button id="switchButton">切换地图（全部）</button>    
+      
+    <!-- 伪数据：当前已经标记的景点 -->    
+    <div id="markerInfo">当前已经标记景点 <span>2</span> 个：<br>
+        <span>五峰山景区</span><br> <span>渔岛海洋温泉度假区</span></div>    
+  
+    <script type="text/javascript">    
+        // 初始化地图    
+        var map = new AMap.Map('mapContainer', {    
+            zoom: 10, // 设置地图缩放级别    
+            center: [119.528179,39.909689] // 设置地图中心点坐标    
+        });    
+          
+        // 切换按钮点击事件    
+        document.getElementById('switchButton').addEventListener('click', function() {    
+            // 在这里编写切换逻辑    
+            alert('切换视图功能尚未实现，请在此处添加您的代码。');    
+        });    
+    </script>    
+</body>    
+</html>
